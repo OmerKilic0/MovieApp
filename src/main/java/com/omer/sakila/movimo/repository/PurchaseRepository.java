@@ -7,5 +7,5 @@ import com.omer.sakila.movimo.entity.Purchase;
 
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase, Integer>{
-
+	Purchase findById(int id);
 }

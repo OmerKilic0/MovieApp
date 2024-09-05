@@ -41,8 +41,7 @@ public class PurchaseService {
     }
 	
 	public Purchase createPurchase(int customerId, int filmId) {
-		Customer customer = customerRepository.findById(customerId).
-				orElseThrow(() -> new RuntimeException("Customer not found"));
+		Customer customer = customerRepository.findById(customerId);
 		Film film = filmRepository.findById(filmId);
 		
 		Purchase purchase = new Purchase();

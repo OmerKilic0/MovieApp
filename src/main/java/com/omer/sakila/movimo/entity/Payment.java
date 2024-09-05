@@ -23,8 +23,9 @@ public class Payment {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @Column(name = "purchase_id")
-    private int purchase;
+    @ManyToOne
+    @JoinColumn(name = "purchase_id")
+    private Purchase purchase;
 
     @Column(name = "amount", nullable = false)
     private Double amount;
@@ -51,11 +52,11 @@ public class Payment {
 		this.customer = customer;
 	}
 
-	public int getPurchase() {
+	public Purchase getPurchase() {
 		return purchase;
 	}
 
-	public void setPurchase(int purchase) {
+	public void setPurchase(Purchase purchase) {
 		this.purchase = purchase;
 	}
 

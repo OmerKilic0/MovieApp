@@ -7,5 +7,5 @@ import com.omer.sakila.movimo.entity.Payment;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Integer>{
-
+	Payment findById(int id);
 }

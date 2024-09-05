@@ -25,11 +25,10 @@ public class PaymentService {
 	}
 	
 	public Payment createPayment(int purchaseId, double amount) {
-		Purchase purchase = purchaseRepository.findById(purchaseId).
-				orElseThrow(() -> new RuntimeException("Purchase not found"));
+		Purchase purchase = purchaseRepository.findById(purchaseId);
 		
 		Payment payment = new Payment();
-		payment.setPurchase(purchaseId);
+		payment.setPurchase(purchase);
 		payment.setCustomer(purchase.getCustomer());
 		payment.setAmount(amount);
 		payment.setPaymentDate(new Date());

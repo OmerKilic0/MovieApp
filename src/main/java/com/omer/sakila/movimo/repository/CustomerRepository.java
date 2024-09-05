@@ -7,5 +7,5 @@ import com.omer.sakila.movimo.entity.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer>{
-
+	Customer findById(int id);
 }
