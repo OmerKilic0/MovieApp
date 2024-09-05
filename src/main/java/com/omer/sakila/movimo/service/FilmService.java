@@ -3,6 +3,7 @@ package com.omer.sakila.movimo.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.omer.sakila.movimo.entity.Film;
@@ -34,4 +35,8 @@ public class FilmService {
 	public Film getFilmByTitle(String title) {
 		return filmRepository.findByTitle(title);
 	}
+	
+	public List<Film> getTopSoldFilms(int limit) {
+        return filmRepository.findTopSoldFilms(PageRequest.of(0, limit));
+    }
 }

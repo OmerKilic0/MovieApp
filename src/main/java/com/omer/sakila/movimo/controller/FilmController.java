@@ -50,6 +50,7 @@ public class FilmController {
         if (film != null) {
             model.addAttribute("film", film);
             model.addAttribute("hasPurchased", hasPurchased);
+            model.addAttribute("topSoldFilms", filmService.getTopSoldFilms(5));
         }
         return "film-details";
     }

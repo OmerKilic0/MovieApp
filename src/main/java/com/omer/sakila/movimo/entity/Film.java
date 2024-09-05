@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -53,6 +54,9 @@ public class Film {
 
     @Column(name = "last_update", nullable = false)
     private Date lastUpdate;
+    
+    @OneToMany(mappedBy = "film")
+    private Set<Purchase> purchases;
     
     @ManyToMany
     @JoinTable(
@@ -172,5 +176,13 @@ public class Film {
 
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
+	}
+
+	public Set<Purchase> getPurchases() {
+		return purchases;
+	}
+
+	public void setPurchases(Set<Purchase> purchases) {
+		this.purchases = purchases;
 	}
 }

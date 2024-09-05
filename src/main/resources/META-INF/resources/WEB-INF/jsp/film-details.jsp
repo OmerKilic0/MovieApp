@@ -64,8 +64,12 @@ body {
 	color: #fff;
 }
 
-.sidebar h2, h3 {
+.sidebar h2, h3{
 	color: #588157;
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #003566;
+    padding-bottom: 10px;
 }
 
 .left-sidebar {
@@ -74,6 +78,33 @@ body {
 
 .right-sidebar {
 	border-left: 2px solid #003566;
+}
+
+.right-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.right-sidebar ul li {
+    background-color: #111;
+    border: 1px solid #003566;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: #fdf0d5;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.right-sidebar ul li:hover {
+	cursor:pointer;
+    background-color: #003566;
+    transform: scale(1.05);
+}
+
+.right-sidebar ul li span {
+    font-weight: bold;
+    color: #ffb703;
 }
 
 .main-content {
@@ -238,7 +269,7 @@ body {
 				amount : amount
 			},
 			success : function(response) {
-				alert("Purchase successful " + response);
+				alert(response);
 				location.reload();
 			},
 			error : function(xhr) {
@@ -309,8 +340,8 @@ body {
 			<p>ADD CONTEXT</p>
 			<h3>Popular Films</h3>
 			<ul>
-				<c:forEach var="film" items="${mostSoldFilms}">
-					<li>${film.title}- ${film.salesCount} Sales</li>
+				<c:forEach var="film" items="${topSoldFilms}">
+					<li><span onclick="window.location.href='/films/${film.title}'">${film.title}</span></li>
 				</c:forEach>
 			</ul>
 		</div>

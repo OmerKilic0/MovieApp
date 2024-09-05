@@ -9,15 +9,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.omer.sakila.movimo.entity.Actor;
 import com.omer.sakila.movimo.service.ActorService;
+import com.omer.sakila.movimo.service.FilmService;
 
 @Controller
 @RequestMapping("/actors")
 public class ActorController {
 
 	private ActorService actorService;
+	private FilmService filmService;
 	
-	public ActorController(ActorService actorService) {
+	public ActorController(ActorService actorService, FilmService filmService) {
 		this.actorService = actorService;
+		this.filmService = filmService;
 	}
 	
 	@GetMapping
@@ -40,6 +43,7 @@ public class ActorController {
 	public String getActorById(@PathVariable Integer id, ModelMap model) {
         Actor actor = actorService.getActorById(id);
         model.addAttribute("actor", actor);
+        model.addAttribute("topSoldFilms", filmService.getTopSoldFilms(5));
         return "actor-details";
     }
 }
