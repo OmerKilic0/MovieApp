@@ -19,10 +19,6 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne
-	@JoinColumn(name = "store_id", nullable = false)
-	private Store storeId;
-
 	@Column(name = "first_name")
 	private String firstName;
 
@@ -34,7 +30,7 @@ public class Customer {
 
 	@ManyToOne
 	@JoinColumn(name = "address_id", nullable = false)
-	private Address addressId;
+	private Address address;
 
 	@Column(name = "active", nullable = false)
 	private Boolean active;
@@ -51,14 +47,6 @@ public class Customer {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Store getStoreId() {
-		return storeId;
-	}
-
-	public void setStoreId(Store storeId) {
-		this.storeId = storeId;
 	}
 
 	public String getFirstName() {
@@ -85,12 +73,12 @@ public class Customer {
 		this.email = email;
 	}
 
-	public Address getAddressId() {
-		return addressId;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setAddressId(Address addressId) {
-		this.addressId = addressId;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public Boolean getActive() {

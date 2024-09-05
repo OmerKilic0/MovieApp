@@ -12,30 +12,41 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "inventory")
-public class Inventory {
+@Table(name = "purchase")
+public class Purchase {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name = "purchase_date")
+	private Date purchaseDate;
+	
 	@ManyToOne
-	@JoinColumn(name = "film_id", nullable = false)
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
+	
+	@ManyToOne
+	@JoinColumn(name = "film_id")
 	private Film film;
-	
-	@ManyToOne
-	@JoinColumn(name = "store_id", nullable = false)
-	private Store store;
-	
+
 	@Column(name = "last_update")
 	private Date lastUpdate;
-
+	
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
+
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
 	}
 
 	public Film getFilm() {
@@ -46,14 +57,14 @@ public class Inventory {
 		this.film = film;
 	}
 
-	public Store getStore() {
-		return store;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setStore(Store store) {
-		this.store = store;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
-
+	
 	public Date getLastUpdate() {
 		return lastUpdate;
 	}

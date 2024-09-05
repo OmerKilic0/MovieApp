@@ -8,9 +8,9 @@
         <i class="fa-solid fa-film" style="color: #e2121d;"></i> Films
     </a>
     <a href="${pageContext.request.contextPath}/actors">
-        <i class="fa-solid fa-user" style="color: #e2121d;"></i> Actors
+        <i class="fa-solid fa-users" style="color: #e2121d;"></i> Actors
     </a>
     <a href="${pageContext.request.contextPath}/categories">
-        <i class="fa-solid fa-tags" style="color: #e2121d;"></i> Categories
+        <i class="fa-solid fa-list" style="color: #e2121d;"></i> Categories
     </a>
 </div>

@@ -21,14 +21,10 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customerId;
+    private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "staff_id", nullable = false)
-    private Staff staffId;
-
-    @Column(name = "rental_id")
-    private int rentalId;
+    @Column(name = "purchase_id")
+    private int purchase;
 
     @Column(name = "amount", nullable = false)
     private Double amount;
@@ -47,28 +43,20 @@ public class Payment {
 		this.id = id;
 	}
 
-	public Customer getCustomerId() {
-		return customerId;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerId(Customer customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public Staff getStaffId() {
-		return staffId;
+	public int getPurchase() {
+		return purchase;
 	}
 
-	public void setStaffId(Staff staffId) {
-		this.staffId = staffId;
-	}
-
-	public int getRentalId() {
-		return rentalId;
-	}
-
-	public void setRentalId(int rentalId) {
-		this.rentalId = rentalId;
+	public void setPurchase(int purchase) {
+		this.purchase = purchase;
 	}
 
 	public Double getAmount() {
