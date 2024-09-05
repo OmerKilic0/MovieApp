@@ -7,22 +7,22 @@ VALUES
 ('Spanish', CURRENT_TIMESTAMP),
 ('Russian', CURRENT_TIMESTAMP);
 
-INSERT INTO film (title, description, release_year, language_id, original_language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features, last_update)
+INSERT INTO film (title, description, release_year, language_id, original_language_id, length, price, rating, special_features, last_update)
 VALUES 
-('Inception', 'A thief who enters the dreams of others to steal secrets is given the chance to have his criminal history erased as payment for the implantation of another person.', 2010, 1, 1, 7, 3.99, 148, 24.99, 'PG-13', 'Trailers, Commentary', CURRENT_TIMESTAMP),
-('Titanic', 'A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.', 1997, 1, 1, 7, 4.99, 195, 29.99, 'PG-13', 'Trailers, Behind the Scenes', CURRENT_TIMESTAMP),
-('The Revenant', 'In the 1820s, a frontiersman on a quest for survival and revenge after being left for dead by members of his own hunting team.', 2015, 1, 1, 7, 4.99, 156, 29.99, 'R', 'Deleted Scenes, Commentary', CURRENT_TIMESTAMP),
-('Fight Club', 'An insomniac office worker and a soap salesman build a global organization to help vent male aggression.', 1999, 1, 1, 7, 2.99, 139, 19.99, 'R', 'Deleted Scenes, Commentary', CURRENT_TIMESTAMP),
-('The Matrix', 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.', 1999, 1, 1, 7, 2.99, 136, 19.99, 'R', 'Trailers, Behind the Scenes', CURRENT_TIMESTAMP),
-('Interstellar', 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity survival.', 2014, 1, 1, 7, 4.99, 169, 29.99, 'PG-13', 'Trailers, Deleted Scenes, Behind the Scenes', CURRENT_TIMESTAMP),
-('The Godfather', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 1972, 1, 1, 7, 2.99, 175, 19.99, 'R', 'Trailers, Commentary, Behind the Scenes', CURRENT_TIMESTAMP),
-('The Dark Knight', 'When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.', 2008, 1, 1, 7, 3.99, 152, 24.99, 'PG-13', 'Trailers, Commentary, Deleted Scenes', CURRENT_TIMESTAMP),
-('The Shawshank Redemption', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 1994, 1, 1, 7, 2.99, 142, 19.99, 'R', 'Trailers, Behind the Scenes', CURRENT_TIMESTAMP),
-('Gladiator', 'A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.', 2000, 1, 1, 7, 4.99, 155, 29.99, 'R', 'Trailers, Commentary', CURRENT_TIMESTAMP),
-('The Silence of the Lambs', 'A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.', 1991, 1, 1, 7, 3.99, 118, 24.99, 'R', 'Trailers, Commentary', CURRENT_TIMESTAMP),
-('Se7en', 'Two detectives hunt a serial killer who uses the seven deadly sins as his modus operandi.', 1995, 1, 1, 7, 4.99, 127, 29.99, 'R', 'Deleted Scenes, Behind the Scenes', CURRENT_TIMESTAMP),
-('The Shining', 'A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence.', 1980, 1, 1, 7, 3.99, 146, 24.99, 'R', 'Deleted Scenes, Behind the Scenes', CURRENT_TIMESTAMP),
-('The Departed', 'An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in Boston.', 2006, 1, 1, 7, 4.99, 151, 29.99, 'R', 'Deleted Scenes, Behind the Scenes, Trailers', CURRENT_TIMESTAMP);
+('Inception', 'A thief who enters the dreams of others to steal secrets is given the chance to have his criminal history erased as payment for the implantation of another person.', 2010, 1, 1, 148, 4.99, 'PG-13', 'Trailers, Commentary', CURRENT_TIMESTAMP),
+('Titanic', 'A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.', 1997, 1, 1, 195, 2.99, 'PG-13', 'Trailers, Behind the Scenes', CURRENT_TIMESTAMP),
+('The Revenant', 'In the 1820s, a frontiersman on a quest for survival and revenge after being left for dead by members of his own hunting team.', 2015, 1, 1, 156, 2.49, 'R', 'Deleted Scenes, Commentary', CURRENT_TIMESTAMP),
+('Fight Club', 'An insomniac office worker and a soap salesman build a global organization to help vent male aggression.', 1999, 1, 1, 139, 3.99, 'R', 'Deleted Scenes, Commentary', CURRENT_TIMESTAMP),
+('The Matrix', 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.', 1999, 1, 1, 136, 2.99, 'R', 'Trailers, Behind the Scenes', CURRENT_TIMESTAMP),
+('Interstellar', 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity survival.', 2014, 1, 1, 169, 4.99, 'PG-13', 'Trailers, Deleted Scenes, Behind the Scenes', CURRENT_TIMESTAMP),
+('The Godfather', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 1972, 1, 1, 175, 3.99, 'R', 'Trailers, Commentary, Behind the Scenes', CURRENT_TIMESTAMP),
+('The Dark Knight', 'When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.', 2008, 1, 1, 152, 4.99, 'PG-13', 'Trailers, Commentary, Deleted Scenes', CURRENT_TIMESTAMP),
+('The Shawshank Redemption', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 1994, 1, 1, 142, 1.99, 'R', 'Trailers, Behind the Scenes', CURRENT_TIMESTAMP),
+('Gladiator', 'A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.', 2000, 1, 1, 155, 2.99, 'R', 'Trailers, Commentary', CURRENT_TIMESTAMP),
+('The Silence of the Lambs', 'A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.', 1991, 1, 1, 118, 3.99, 'R', 'Trailers, Commentary', CURRENT_TIMESTAMP),
+('Se7en', 'Two detectives hunt a serial killer who uses the seven deadly sins as his modus operandi.', 1995, 1, 1, 127, 3.99, 'R', 'Deleted Scenes, Behind the Scenes', CURRENT_TIMESTAMP),
+('The Shining', 'A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence.', 1980, 1, 1, 146, 4.99, 'R', 'Deleted Scenes, Behind the Scenes', CURRENT_TIMESTAMP),
+('The Departed', 'An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in Boston.', 2006, 1, 1, 151, 2.99, 'R', 'Deleted Scenes, Behind the Scenes, Trailers', CURRENT_TIMESTAMP);
 
 INSERT INTO actor (first_name, last_name, last_update)
 VALUES 

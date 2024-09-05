@@ -166,6 +166,20 @@ body {
 	color: #fff;
 }
 
+.purchased-button {
+	position: absolute;
+	background-color: #808080;
+	color: #ffffff;
+	cursor: not-allowed;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 18px;
+	transition: none;
+	right: 20px;
+	bottom: 20px;
+}
+
 .price-info {
 	font-size: 20px;
 	color: #fdf0d5;
@@ -272,7 +286,7 @@ body {
 				</p>
 				<p>
 					<i class="fa-solid fa-dollar-sign" style="color: #fdf0d5"></i> <span
-						class="film-attribute"> Price: </span> ${film.replacementCost}
+						class="film-attribute"> Price: </span> \$${film.price}
 				</p>
 				<h2>Actors:</h2>
 				<ul>
@@ -282,10 +296,10 @@ body {
 				</ul>
 				<c:choose>
 					<c:when test="${hasPurchased}">
-						<span class="purchase-button">PURCHASED</span>
+						<span class="purchased-button">PURCHASED</span>
 					</c:when>
 					<c:otherwise>
-						<button class="purchase-button" onclick="purchaseFilm(1, ${film.id}, ${film.replacementCost})">PURCHASE</button>
+						<button class="purchase-button" onclick="purchaseFilm(1, ${film.id}, ${film.price})">PURCHASE</button>
 					</c:otherwise>
 				</c:choose>
 			</div>

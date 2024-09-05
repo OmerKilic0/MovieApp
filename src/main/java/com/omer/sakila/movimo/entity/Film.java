@@ -38,18 +38,12 @@ public class Film {
 	@ManyToOne
     @JoinColumn(name = "original_language_id")
     private Language originalLanguage;
-
-    @Column(name = "rental_duration", nullable = false)
-    private Integer rentalDuration;
-	
-	@Column(name = "rental_rate")
-	private String rentalRate;
 	
 	@Column(name = "length")
 	private Integer length;
 
-	@Column(name = "replacement_cost", nullable = false)
-    private Double replacementCost;
+	@Column(name = "price", nullable = false)
+    private Double price;
 
     @Column(name = "rating")
     private String rating;
@@ -124,22 +118,6 @@ public class Film {
 		this.originalLanguage = originalLanguage;
 	}
 
-	public Integer getRentalDuration() {
-		return rentalDuration;
-	}
-
-	public void setRentalDuration(Integer rentalDuration) {
-		this.rentalDuration = rentalDuration;
-	}
-
-	public String getRentalRate() {
-		return rentalRate;
-	}
-
-	public void setRentalRate(String rentalRate) {
-		this.rentalRate = rentalRate;
-	}
-
 	public Integer getLength() {
 		return length;
 	}
@@ -148,12 +126,12 @@ public class Film {
 		this.length = length;
 	}
 
-	public Double getReplacementCost() {
-		return replacementCost;
+	public Double getprice() {
+		return price;
 	}
 
-	public void setReplacementCost(Double replacementCost) {
-		this.replacementCost = replacementCost;
+	public void setReplacementCost(Double price) {
+		this.price = price;
 	}
 
 	public String getRating() {
