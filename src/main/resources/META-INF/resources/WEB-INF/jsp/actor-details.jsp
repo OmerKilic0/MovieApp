@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Movimo - ${actor.firstName} ${actor.lastName}</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
 body {
 	margin: 0;
@@ -80,9 +79,18 @@ body {
 }
 
 .actor-details ul li {
-    font-size: 17px;
+    font-size: 18px;
     margin-bottom: 8px;
     cursor: pointer;
+}
+
+.actor-details ul li a {
+    color: #ffb703;
+    text-decoration: underline;
+}
+
+.actor-details ul li a:hover {
+    text-decoration: none;
 }
 
 .back-button {
@@ -107,7 +115,6 @@ body {
 .back-button:hover {
     transform: scale(1.2);
 }
-
 </style>
 </head>
 <body>
@@ -122,7 +129,7 @@ body {
 		<h2>Films:</h2>
 		<ul>
 			<c:forEach var="film" items="${actor.films}">
-				<li onclick="window.location.href='${pageContext.request.contextPath}/films/${film.title}'">${film.title}</li>
+				<li><a href="${pageContext.request.contextPath}/films/${film.title}">${film.title}</a></li>
 			</c:forEach>
 		</ul>
 	</div>

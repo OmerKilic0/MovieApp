@@ -8,6 +8,9 @@
 <title>Movimo - ${film.title}</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+	rel="stylesheet">
 <style>
 body {
 	margin: 0;
@@ -42,7 +45,7 @@ body {
 }
 
 .nav-bar i {
-	margin-right: 8px; /* Space between icon and text */
+	margin-right: 8px;
 }
 
 .nav-bar a:hover {
@@ -50,17 +53,17 @@ body {
 }
 
 .film-attribute {
-    color: #ffb703;
+	color: #ffb703;
 }
 
 .film-details {
-    margin: 20px auto;
-    max-width: 600px;
-    padding: 15px;
-    background-color: #000;
-    border-radius: 8px;
-    border: 2px solid #003566;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	margin: 20px auto;
+	max-width: 600px;
+	padding: 15px;
+	background-color: #000;
+	border-radius: 8px;
+	border: 2px solid #003566;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .film-details h1 {
@@ -105,30 +108,71 @@ body {
 .back-button:hover {
 	transform: scale(1.2);
 }
+
+.categories {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 10px;
+	list-style: none;
+	padding: 0;
+}
+
+.categories li {
+	margin: 0 10px;
+	position: relative;
+	font-size: 18px;
+}
+
+.categories li:not(:last-child)::after {
+	content: '\2022';
+	color: #bbb;
+	font-size: 20px;
+	margin-left: 16px;
+}
+
+.categories a {
+	text-decoration: underline;
+	color: #fb8500;
+	cursor: pointer;
+	font-size: 20px
+}
+
+.categories a:hover {
+	text-decoration: none;
+}
 </style>
 </head>
 <body>
 	<div class="film-details">
 		<a href="javascript:history.back()" class="back-button"> <i
-			class="fa-solid fa-circle-chevron-left fa-lg"></i>
-		</a> 
-		<img
+			class="fa-solid fa-circle-chevron-left fa-lg"></i></a> <img
 			src="${pageContext.request.contextPath}/images/films/poster${film.id}.jpg"
 			alt="${film.title} Poster">
 		<h1>${film.title}</h1>
+
+		<ul class="categories">
+			<c:forEach var="category" items="${film.categories}">
+				<li><a
+					onclick="window.location.href='/categories/${category.name}'">${category.name}</a></li>
+			</c:forEach>
+		</ul>
+
 		<p>${film.description}</p>
-		<p><span class="film-attribute">Language: </span>${film.language.name}</p>
-		<p><span class="film-attribute">Length: </span>${film.length}</p>
+		<p>
+			<i class="bi bi-translate" style="color: #fdf0d5;"></i><span
+				class="film-attribute"> Language: </span>${film.language.name}</p>
+		<p>
+			<i class="fa-solid fa-clock" style="color: #fdf0d5;"></i><span
+				class="film-attribute"> Duration: </span>${film.length} minutes
+		</p>
+		<p>
+			<i class="fa-solid fa-calendar-days" style="color: #fdf0d5;"></i><span
+				class="film-attribute"> Release Year: </span>${film.releaseYear}</p>
+
 		<h2>Actors:</h2>
 		<ul>
 			<c:forEach var="actor" items="${film.actors}">
 				<li>${actor.firstName} ${actor.lastName}</li>
-			</c:forEach>
-		</ul>
-		<h2>Categories:</h2>
-		<ul>
-			<c:forEach var="category" items="${film.categories}">
-				<li>${category.name}</li>
 			</c:forEach>
 		</ul>
 	</div>
