@@ -1,0 +1,143 @@
+.film-attribute {
+    color: #ffb703;
+}
+
+.film-details {
+    position: relative;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 15px;
+    background-color: #000;
+    border-radius: 8px;
+    border: 2px solid #003566;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    align-items: flex-start;
+}
+
+.film-details h1 {
+    margin-top: 0;
+    color: #588157;
+}
+
+.film-details h2 {
+    margin-top: 0;
+    color: #b8c0ff;
+}
+
+.film-details img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: 70px;
+}
+
+.film-media {
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.icon-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.icon-buttons form {
+    display: inline;
+    margin: 0 5px;
+}
+
+.icon-buttons button {
+    background: none;
+    border: none;
+    color: #ffb703;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.icon-buttons button:hover {
+    color: #e36414;
+}
+
+.purchase-button {
+    position: absolute;
+    background-color: #ffb703;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    right: 20px;
+    bottom: 20px;
+}
+
+.purchase-button:hover {
+    background-color: #e36414;
+    color: #fff;
+}
+
+.purchased-button {
+    position: absolute;
+    background-color: #808080;
+    color: #ffffff;
+    cursor: not-allowed;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: none;
+    right: 20px;
+    bottom: 20px;
+}
+
+.price-info {
+    font-size: 20px;
+    color: #fdf0d5;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.price-info i {
+    margin-right: 10px;
+    color: #e36414;
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+.categories li {
+    margin: 0 10px;
+    position: relative;
+    font-size: 18px;
+}
+
+.categories li:not(:last-child)::after {
+    content: '\2022';
+    color: #bbb;
+    font-size: 20px;
+    margin-left: 16px;
+}
+
+.categories a {
+    text-decoration: underline;
+    color: #fb8500;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.categories a:hover {
+    text-decoration: none;
+}

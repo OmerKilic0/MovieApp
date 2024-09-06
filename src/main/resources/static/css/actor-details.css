@@ -1,0 +1,50 @@
+.actor-details {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 15px;
+    background-color: #000;
+    border-radius: 8px;
+    border: 2px solid #003566;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.actor-details h1 {
+	margin-top: 0;
+	color: #588157;
+}
+
+.actor-details h2 {
+	margin-top: 0;
+	color: #b8c0ff;
+}
+
+.actor-details img {
+	width: 50%;
+	height: auto;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.actor-details ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+.actor-details ul li {
+    font-size: 18px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.actor-details ul li a {
+    color: #ffb703;
+    text-decoration: underline;
+}
+
+.actor-details ul li a:hover {
+    text-decoration: none;
+}
