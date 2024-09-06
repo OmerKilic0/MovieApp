@@ -199,5 +199,7 @@ VALUES
 ('2 Nevsky Prospect', NULL, 'Tsentralny', 10, '191186', '555-6789', CURRENT_TIMESTAMP),
 ('3 Lenina St', NULL, 'Sovetsky', 10, '630102', '555-3456', CURRENT_TIMESTAMP);
 
-INSERT INTO customer (first_name, last_name, email, address_id, active, create_date, last_update)
-VALUES ('John', 'Doe', 'john.doe@example.com', 1, TRUE, NOW(), NOW());
+INSERT INTO customer (first_name, last_name, email, password, address_id, active, create_date, last_update)
+VALUES
+('John', 'Doe', 'john.doe@example.com', 'password', 1, TRUE, NOW(), NOW()),
+('Omer', 'Kilic', 'omer.kilic@example.com', 'password', 1, TRUE, NOW(), NOW());

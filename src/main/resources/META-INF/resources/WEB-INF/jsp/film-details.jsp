@@ -330,7 +330,7 @@ body {
 						<span class="purchased-button">PURCHASED</span>
 					</c:when>
 					<c:otherwise>
-						<button class="purchase-button" onclick="purchaseFilm(1, ${film.id}, ${film.price})">PURCHASE</button>
+						<button class="purchase-button" onclick="purchaseFilm(${customer.id}, ${film.id}, ${film.price})">PURCHASE</button>
 					</c:otherwise>
 				</c:choose>
 			</div>

@@ -13,4 +13,11 @@
     <a href="${pageContext.request.contextPath}/categories">
         <i class="fa-solid fa-list" style="color: #e2121d;"></i> Categories
     </a>
+    
+    <div class="user-info" style="float: right;">
+            <span>${customer.firstName} ${customer.lastName}</span>
+
+            <a href="${pageContext.request.contextPath}/logout" 
+               style="color: #e2121d; margin-left: 15px;">Logout</a>
+        </div>
 </div>
