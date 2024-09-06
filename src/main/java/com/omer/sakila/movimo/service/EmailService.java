@@ -13,12 +13,12 @@ public class EmailService {
         this.mailSender = mailSender;
     }
 
-    public void sendFeedbackNotification(String to, String subject, String text) {
+    public void sendPurchaseNotification(String to, String filmTitle) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
+        message.setTo("omerfarukkilic.17@gmail.com");
         message.setFrom("mailtrap@demomailtrap.com");
-        message.setSubject(subject);
-        message.setText(text);
+        message.setSubject("Purchase Confirmation");
+        message.setText("Dear customer,\n\nYou have successfully purchased the film: " + filmTitle + ".\n\nThank you for your purchase!\n\nBest regards,\nMovimo");
         mailSender.send(message);
     }
 }

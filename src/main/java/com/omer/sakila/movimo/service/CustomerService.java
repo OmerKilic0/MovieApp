@@ -31,6 +31,10 @@ public class CustomerService {
 		return customerRepository.findAll();
 	}
 	
+	public Customer findById(int id) {
+		return customerRepository.findById(id);
+	}
+	
 	public Customer findByEmail(String email) {
 		return customerRepository.findByEmail(email);
 	}

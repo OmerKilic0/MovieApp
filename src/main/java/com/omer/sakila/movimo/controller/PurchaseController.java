@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.omer.sakila.movimo.entity.Customer;
+import com.omer.sakila.movimo.entity.Film;
 import com.omer.sakila.movimo.entity.Purchase;
+import com.omer.sakila.movimo.service.CustomerService;
+import com.omer.sakila.movimo.service.EmailService;
+import com.omer.sakila.movimo.service.FilmService;
 import com.omer.sakila.movimo.service.PaymentService;
 import com.omer.sakila.movimo.service.PurchaseService;
 
@@ -21,15 +26,32 @@ public class PurchaseController {
 	@Autowired
 	private PaymentService paymentService;
 	
-	public PurchaseController(PurchaseService purchaseService, PaymentService paymentService) {
+	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
+	private FilmService filmService;
+	
+	@Autowired
+	private CustomerService customerService;
+	
+	public PurchaseController(PurchaseService purchaseService, PaymentService paymentService, EmailService emailService, FilmService filmService, CustomerService customerService) {
 		this.purchaseService = purchaseService;
 		this.paymentService = paymentService;
+		this.emailService = emailService;
+		this.filmService = filmService;
+		this.customerService = customerService;
 	}
 	
 	@PostMapping("/buy")
 	public ResponseEntity<String> buyFilm(@RequestParam int customerId, @RequestParam int filmId, @RequestParam double amount){
 		Purchase purchase = purchaseService.createPurchase(customerId, filmId);
 		paymentService.createPayment(purchase.getId(), amount);
+		
+		Customer customer = customerService.findById(customerId);
+		Film film = filmService.getFilmById(filmId);
+		
+		emailService.sendPurchaseNotification(customer.getEmail(), film.getTitle());
 		
 		return ResponseEntity.ok("Film purchased successfully!");
 	}
