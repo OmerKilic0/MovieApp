@@ -16,7 +16,7 @@
         function showDetails(name) {
         	window.location.href = '/categories/' + name;
         }
-    </script>
+</script>
 </head>
 <body>
 	<div class="search-container">

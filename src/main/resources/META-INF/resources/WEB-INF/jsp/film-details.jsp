@@ -17,56 +17,13 @@
 	href="${pageContext.request.contextPath}/css/film-details.css">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/script.js"></script>
 <script>
-	function purchaseFilm(customerId, filmId, amount) {
-		$.ajax({
-			type : 'POST',
-			url : '/api/purchase/buy',
-			data : {
-				customerId : customerId,
-				filmId : filmId,
-				amount : amount
-			},
-			success : function(response) {
-				alert(response);
-				location.reload();
-			},
-			error : function(xhr) {
-				alert("Purchase failed: " + xhr.responseText);
-			}
-		});
-	}
-	
-	function handleAction(action, filmId) {
-		var form = document.getElementById(action + '-' + filmId);
-		if (form) {
-			form.submit();
-		}
-	}
-
-	$(document).ready(function() {
-	    var watchedFilmIds = ${watched};
-	    var inWatchlistFilmIds = ${inWatchlist};
-	    var filmId = ${film.id};
-
-	    if (watchedFilmIds.includes(filmId)) {
-	        $('#add-to-watched').hide();
-	        $('#remove-from-watched').show();
-	    } else {
-	        $('#add-to-watched').show();
-	        $('#remove-from-watched').hide();
-	    }
-
-	    if (inWatchlistFilmIds.includes(filmId)) {
-	        $('#add-to-watchlist').hide();
-	        $('#remove-from-watchlist').show();
-	    } else {
-	        $('#add-to-watchlist').show();
-	        $('#remove-from-watchlist').hide();
-	    }
-	});
-	
+        var watchedFilmIdsFromServer = ${watched};
+        var inWatchlistFilmIdsFromServer = ${inWatchlist};
+        var filmIdFromServer = ${film.id};
 </script>
+
 </head>
 <body>
 	<div class="container">
