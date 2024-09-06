@@ -58,6 +58,12 @@ public class Film {
     @OneToMany(mappedBy = "film")
     private Set<Purchase> purchases;
     
+    @ManyToMany(mappedBy = "watchedFilms")
+    private Set<Customer> watchers;
+
+    @ManyToMany(mappedBy = "watchlist")
+    private Set<Customer> watchlistedBy;
+    
     @ManyToMany
     @JoinTable(
         name = "film_actor",
@@ -184,5 +190,29 @@ public class Film {
 
 	public void setPurchases(Set<Purchase> purchases) {
 		this.purchases = purchases;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Set<Customer> getWatchers() {
+		return watchers;
+	}
+
+	public void setWatchers(Set<Customer> watchers) {
+		this.watchers = watchers;
+	}
+
+	public Set<Customer> getWatchlistedBy() {
+		return watchlistedBy;
+	}
+
+	public void setWatchlistedBy(Set<Customer> watchlistedBy) {
+		this.watchlistedBy = watchlistedBy;
 	}
 }

@@ -1,6 +1,8 @@
 package com.omer.sakila.movimo.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -27,7 +31,7 @@ public class Customer {
 
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "password")
 	private String password;
 
@@ -43,6 +47,14 @@ public class Customer {
 
 	@Column(name = "last_update")
 	private Date lastUpdate;
+
+	@ManyToMany
+	@JoinTable(name = "customer_watched_films", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "film_id"))
+	private Set<Film> watchedFilms = new HashSet<>();
+
+	@ManyToMany
+	@JoinTable(name = "customer_watchlist", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "film_id"))
+	private Set<Film> watchlist = new HashSet<>();
 
 	public int getId() {
 		return id;
@@ -75,7 +87,7 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -114,5 +126,21 @@ public class Customer {
 
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+
+	public Set<Film> getWatchedFilms() {
+		return watchedFilms;
+	}
+
+	public void setWatchedFilms(Set<Film> watchedFilms) {
+		this.watchedFilms = watchedFilms;
+	}
+
+	public Set<Film> getWatchlist() {
+		return watchlist;
+	}
+
+	public void setWatchlist(Set<Film> watchlist) {
+		this.watchlist = watchlist;
 	}
 }
