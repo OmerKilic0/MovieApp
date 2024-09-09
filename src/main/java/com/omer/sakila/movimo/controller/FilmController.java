@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.omer.sakila.movimo.entity.Customer;
 import com.omer.sakila.movimo.entity.Film;
+import com.omer.sakila.movimo.service.CommentService;
 import com.omer.sakila.movimo.service.CustomerService;
 import com.omer.sakila.movimo.service.FilmService;
 import com.omer.sakila.movimo.service.PurchaseService;
@@ -30,11 +31,15 @@ public class FilmController {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private CommentService commentService;
 
-	public FilmController(FilmService filmService, PurchaseService purchaseService, CustomerService customerService) {
+	public FilmController(FilmService filmService, PurchaseService purchaseService, CustomerService customerService, CommentService commentService) {
 		this.filmService = filmService;
 		this.purchaseService = purchaseService;
 		this.customerService = customerService;
+		this.commentService = commentService;
 	}
 
 	@GetMapping
@@ -76,6 +81,7 @@ public class FilmController {
 			model.addAttribute("customer", customer);
 			model.addAttribute("watched", watchedFilmIds);
 			model.addAttribute("inWatchlist", watchlistFilmIds);
+			model.addAttribute("comments", commentService.findCommentsByFilm(film.getId()));
 		}
 		return "film-details";
 	}

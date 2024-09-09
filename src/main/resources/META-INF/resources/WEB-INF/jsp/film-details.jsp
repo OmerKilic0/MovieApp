@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/jsp/common/header.jspf"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,6 +130,40 @@
 				<c:forEach var="film" items="${topSoldFilms}">
 					<li><span
 						onclick="window.location.href='/films/${film.title}'">${film.title}</span></li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+
+	<div class="comment-container">
+		<h3>
+			<i class="fa-solid fa-comments"></i> Comments
+		</h3>
+		<form action="${pageContext.request.contextPath}/addComment"
+			method="post">
+			<input type="hidden" name="filmId" value="${film.id}">
+			<textarea name="content" required placeholder="Add comment..."></textarea>
+			<button type="submit">
+				<i class="fa-solid fa-paper-plane"></i> Add Comment
+			</button>
+		</form>
+
+		<div class="user-comments">
+			<ul>
+				<c:forEach var="comment" items="${comments}">
+					<li><strong>${comment.customer.firstName} ${comment.customer.lastName}</strong> 
+						<small><fmt:formatDate value="${comment.createdAt}" pattern="dd-MM-yyyy, HH:mm" /></small>
+						<p>${comment.comment}</p>
+						<div class="comment-actions">
+							 <button id="like-button-${comment.id}" class="like-button ${comment.userLiked ? 'active' : ''}" onclick="toggleLike(${comment.id})">
+		                         <i class="fa-solid fa-thumbs-up"></i>
+		                         <span id="like-count-${comment.id}">${comment.likeCount}</span>
+		                     </button>
+		                     <button id="dislike-button-${comment.id}" class="dislike-button ${comment.userDisliked ? 'active' : ''}" onclick="toggleDislike(${comment.id})">
+		                         <i class="fa-solid fa-thumbs-down"></i>
+		                         <span id="dislike-count-${comment.id}">${comment.dislikeCount}</span>
+		                     </button>
+						</div></li>
 				</c:forEach>
 			</ul>
 		</div>

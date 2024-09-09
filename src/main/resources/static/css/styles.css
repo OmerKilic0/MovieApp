@@ -40,7 +40,8 @@ body {
 
 .container {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px
 }
 
 .sidebar {
@@ -48,6 +49,7 @@ body {
     padding: 20px;
     width: 300px;
     color: #fff;
+    position: relative;
 }
 
 .sidebar h2, .sidebar h3 {
@@ -96,6 +98,7 @@ body {
 .main-content {
     flex: 1;
     padding: 20px;
+    position: relative;
 }
 
 .back-button {
