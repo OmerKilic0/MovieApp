@@ -1,7 +1,6 @@
 package com.omer.sakila.movimo.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,40 +9,36 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "comment")
-public class Comment {
+@Table(name = "reply")
+public class Reply {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="like_count")
+
+	@Column(name = "like_count")
 	private int likeCount;
-	
-	@Column(name="dislike_count")
+
+	@Column(name = "dislike_count")
 	private int dislikeCount;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "comment_id", nullable = false)
+	private Comment comment;
+
 	@ManyToOne
 	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
-	
-	@ManyToOne
-	@JoinColumn(name = "film_id", nullable = false)
-	private Film film;
-	
-	@Column(name = "comment", nullable = false)
-	private String comment;
-	
-	@OneToMany(mappedBy = "comment")
-	private List<Reply> replies;
-	
-	@Column(name = "created_at", nullable = false)
-    private Date createdAt;
-	
+
+	@Column(name = "content", nullable = false, length = 1000)
+	private String content;
+
+	@Column(name = "created_at")
+	private Date createdAt;
+
 	private boolean userLiked = false;
 	private boolean userDisliked = false;
 
@@ -54,21 +49,29 @@ public class Comment {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getLikeCount() {
 		return likeCount;
 	}
-	
+
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
 	}
-	
+
 	public int getDislikeCount() {
 		return dislikeCount;
 	}
-	
+
 	public void setDislikeCount(int dislikeCount) {
 		this.dislikeCount = dislikeCount;
+	}
+
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 
 	public Customer getCustomer() {
@@ -79,28 +82,12 @@ public class Comment {
 		this.customer = customer;
 	}
 
-	public Film getFilm() {
-		return film;
+	public String getContent() {
+		return content;
 	}
 
-	public void setFilm(Film film) {
-		this.film = film;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	
-	public List<Reply> getReplies(){
-		return this.replies;
-	}
-	
-	public void setReplies(List<Reply> replies) {
-		this.replies = replies;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Date getCreatedAt() {

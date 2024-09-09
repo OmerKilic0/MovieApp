@@ -151,19 +151,67 @@
 		<div class="user-comments">
 			<ul>
 				<c:forEach var="comment" items="${comments}">
-					<li><strong>${comment.customer.firstName} ${comment.customer.lastName}</strong> 
-						<small><fmt:formatDate value="${comment.createdAt}" pattern="dd-MM-yyyy, HH:mm" /></small>
-						<p>${comment.comment}</p>
+					<li>
+						<div class="comment-content">
+							<strong>${comment.customer.firstName} ${comment.customer.lastName}</strong>
+							<small><fmt:formatDate value="${comment.createdAt}" pattern="dd-MM-yyyy, HH:mm" /></small>
+							<p>${comment.comment}</p>
+						</div>
 						<div class="comment-actions">
-							 <button id="like-button-${comment.id}" class="like-button ${comment.userLiked ? 'active' : ''}" onclick="toggleLike(${comment.id})">
-		                         <i class="fa-solid fa-thumbs-up"></i>
-		                         <span id="like-count-${comment.id}">${comment.likeCount}</span>
-		                     </button>
-		                     <button id="dislike-button-${comment.id}" class="dislike-button ${comment.userDisliked ? 'active' : ''}" onclick="toggleDislike(${comment.id})">
-		                         <i class="fa-solid fa-thumbs-down"></i>
-		                         <span id="dislike-count-${comment.id}">${comment.dislikeCount}</span>
-		                     </button>
-						</div></li>
+							<button id="like-button-${comment.id}"
+								class="like-button ${comment.userLiked ? 'active' : ''}"
+								onclick="toggleLikeComment(${comment.id})">
+								<i class="fa-solid fa-thumbs-up"></i> <span
+									id="like-count-${comment.id}">${comment.likeCount}</span>
+							</button>
+							<button id="dislike-button-${comment.id}"
+								class="dislike-button ${comment.userDisliked ? 'active' : ''}"
+								onclick="toggleDislikeComment(${comment.id})">
+								<i class="fa-solid fa-thumbs-down"></i> <span
+									id="dislike-count-${comment.id}">${comment.dislikeCount}</span>
+							</button>
+							<button class="reply-button"
+								onclick="showReplyForm(${comment.id})">Reply</button>
+						</div>
+						<div class="reply-form-container" id="reply-form-${comment.id}"
+							style="display: none;">
+							<form action="${pageContext.request.contextPath}/addReply"
+								method="post">
+								<input type="hidden" name="commentId" value="${comment.id}">
+								<textarea name="content" required
+									placeholder="Write your reply..."></textarea>
+								<button type="submit">
+									<i class="fa-solid fa-paper-plane"></i> Send Reply
+								</button>
+							</form>
+						</div>
+					</li>
+					<c:if test="${not empty comment.replies}">
+						<div class="replies">
+							<c:forEach var="reply" items="${comment.replies}">
+								<div class="reply-item">
+									<strong>${reply.customer.firstName}
+										${reply.customer.lastName}</strong> <small><fmt:formatDate
+											value="${reply.createdAt}" pattern="dd-MM-yyyy, HH:mm" /></small>
+									<p>${reply.content}</p>
+									<div class="reply-actions">
+										<button id="like-button-reply-${reply.id}"
+											class="like-button ${reply.userLiked ? 'active' : ''}"
+											onclick="toggleLikeReply(${reply.id})">
+											<i class="fa-solid fa-thumbs-up"></i> <span
+												id="like-count-reply-${reply.id}">${reply.likeCount}</span>
+										</button>
+										<button id="dislike-button-reply-${reply.id}"
+											class="dislike-button ${reply.userDisliked ? 'active' : ''}"
+											onclick="toggleDislikeReply(${reply.id})">
+											<i class="fa-solid fa-thumbs-down"></i> <span
+												id="dislike-count-reply-${reply.id}">${reply.dislikeCount}</span>
+										</button>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</c:if>
 				</c:forEach>
 			</ul>
 		</div>

@@ -202,6 +202,8 @@
 }
 
 .comment-container ul li {
+	display: flex;
+	flex-direction: column;
     background-color: #000;
     border: 1px solid #003566;
     border-left: 4px solid #e2121d;
@@ -232,13 +234,13 @@
 
 .comment-container .comment-actions button {
     background: none;
-    border: none;
     color: #fff;
     font-size: 14px;
     cursor: pointer;
     transition: color 0.3s;
     margin: 0px;
     padding: 5px;
+    border-bottom: 1px solid #888;
 }
 
 .comment-container .comment-actions button.active{
@@ -247,4 +249,127 @@
 
 .comment-container .comment-actions button:hover {
     color: #e2121d;
+}
+
+.comment-content {
+	flex: 1;
+}
+
+.comment-actions {
+    display: flex;
+    align-items: center;
+    padding-top: 30px;
+    gap: 10px;
+}
+
+.comment-actions button {
+    background: none;
+    border: none;
+    color: #ffb703;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.3s;
+}
+
+.comment-actions button:hover {
+    color: #e2121d;
+}
+
+.reply-button {
+    font-size: 14px;
+    color: #ffb703;
+}
+
+.reply-form-container {
+    margin-top: 10px;
+}
+
+.reply-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #003566;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+.reply-form-container button {
+    background-color: #ffb703;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reply-form-container button:hover {
+    background-color: #e36414;
+    color: #fff;
+}
+
+.replies {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    background-color: #111;
+    border: 1px solid #003566;
+    border-left: 4px solid #ffb703;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    padding: 10px;
+    color: #fff;
+    position: relative;
+}
+
+.replies .reply-item {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding-top: 10px;
+	border-bottom: 2px solid #888;
+}
+
+.replies .reply-item .reply-content {
+    flex: 1;
+}
+
+.replies .reply-item .reply-actions {
+	position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.replies .reply-item .reply-actions button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s;
+    margin: 0px;
+    padding: 5px;
+    border-bottom: 1px solid #888;
+}
+
+.replies .reply-item .reply-actions button.active {
+    color: #e2121d;
+}
+
+.replies .reply-item .reply-actions button:hover {
+    color: #e2121d;
+}
+
+.comment-container ul .replies small {
+    display: block;
+    color: #888;
+    font-size: 14px;
+    border-bottom: 1px dashed #888;
+    margin-top: 3px;
 }

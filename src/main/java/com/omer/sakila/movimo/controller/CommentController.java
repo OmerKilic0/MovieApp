@@ -39,12 +39,12 @@ public class CommentController {
 		return "redirect:/films/" + film.getTitle();
 	}
 	
-	@PostMapping("/toggleLike")
+	@PostMapping("/toggleCommentLike")
 	public void updateLikeCount(@RequestParam int commentId) {
 		commentService.toggleLike(commentId);
 	}
 	
-	@PostMapping("/toggleDislike")
+	@PostMapping("/toggleCommentDislike")
 	public void updateDislikeCount(@RequestParam int commentId) {
 		commentService.toggleDislike(commentId);
 	}	

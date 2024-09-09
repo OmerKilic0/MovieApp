@@ -84,4 +84,8 @@ public class CommentService {
 	public List<Comment> findCommentsByFilm(int filmId) {
 		return commentRepository.findByFilmId(filmId);
 	}
+	
+	public Comment findCommentById(int commentId) {
+		return commentRepository.findById(commentId);
+	}
 }

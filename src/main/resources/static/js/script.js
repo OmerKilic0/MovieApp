@@ -46,8 +46,8 @@ $(document).ready(function() {
 	}
 });
 
-function toggleLike(commentId) {
-    fetch('/toggleLike?commentId=' + commentId, {
+function toggleLikeComment(commentId) {
+    fetch('/toggleCommentLike?commentId=' + commentId, {
         method: 'POST',
     })
     .then(response => response.json())
@@ -74,8 +74,8 @@ function toggleLike(commentId) {
     });
 }
 
-function toggleDislike(commentId) {
-    fetch('/toggleDislike?commentId=' + commentId, {
+function toggleDislikeComment(commentId) {
+    fetch('/toggleCommentDislike?commentId=' + commentId, {
         method: 'POST',
     })
     .then(response => response.json())
@@ -100,4 +100,69 @@ function toggleDislike(commentId) {
             dislikeButton.classList.add('active');
         }
     });
+}
+
+function toggleLikeReply(replyId) {
+    fetch('/toggleReplyLike?replyId=' + replyId, {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(() => {
+        var likeButtonReply = document.getElementById('like-button-reply-' + replyId);
+        var dislikeButtonReply = document.getElementById('dislike-button-reply-' + replyId);
+        var likeCountElementReply = document.getElementById('like-count-reply-' + replyId);
+        var dislikeCountElementReply = document.getElementById('dislike-count-reply-' + replyId);
+        
+        var currentLikeCountReply = parseInt(likeCountElementReply.textContent);
+        var currentDislikeCountReply = parseInt(dislikeCountElementReply.textContent);
+        
+        if (likeButtonReply.classList.contains('active')) {
+            likeCountElementReply.textContent = currentLikeCountReply - 1;
+            likeButtonReply.classList.remove('active');
+        } else {
+            if (dislikeButtonReply.classList.contains('active')) {
+                dislikeCountElementReply.textContent = currentDislikeCountReply - 1;
+                dislikeButtonReply.classList.remove('active');
+            }
+            likeCountElementReply.textContent = currentLikeCountReply + 1;
+            likeButtonReply.classList.add('active');
+        }
+    });
+}
+
+function toggleDislikeReply(replyId) {
+    fetch('/toggleReplyDislike?replyId=' + replyId, {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(() => {
+        var likeButtonReply = document.getElementById('like-button-reply-' + replyId);
+        var dislikeButtonReply = document.getElementById('dislike-button-reply-' + replyId);
+        var likeCountElementReply = document.getElementById('like-count-reply-' + replyId);
+        var dislikeCountElementReply = document.getElementById('dislike-count-reply-' + replyId);
+        
+        var currentLikeCountReply = parseInt(likeCountElementReply.textContent);
+        var currentDislikeCountReply = parseInt(dislikeCountElementReply.textContent);
+        
+        if (dislikeButtonReply.classList.contains('active')) {
+            dislikeCountElementReply.textContent = currentDislikeCountReply - 1;
+            dislikeButtonReply.classList.remove('active');
+        } else {
+            if (likeButtonReply.classList.contains('active')) {
+                likeCountElementReply.textContent = currentLikeCountReply - 1;
+                likeButtonReply.classList.remove('active');
+            }
+            dislikeCountElementReply.textContent = currentDislikeCountReply + 1;
+            dislikeButtonReply.classList.add('active');
+        }
+    });
+}
+
+function showReplyForm(commentId) {
+    var replyForm = document.getElementById('reply-form-' + commentId);
+    if (replyForm.style.display === 'none' || replyForm.style.display === '') {
+        replyForm.style.display = 'block';
+    } else {
+        replyForm.style.display = 'none';
+    }
 }
