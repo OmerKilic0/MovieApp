@@ -4,26 +4,28 @@
         style="color: #c1121f; text-decoration: none;">Movimo</a>
 </div>
 <div class="nav-bar">
-    <a href="${pageContext.request.contextPath}/films">
-        <i class="fa-solid fa-film" style="color: #e2121d;"></i> Films
-    </a>
-    <a href="${pageContext.request.contextPath}/actors">
-        <i class="fa-solid fa-users" style="color: #e2121d;"></i> Actors
-    </a>
-    <a href="${pageContext.request.contextPath}/categories">
-        <i class="fa-solid fa-list" style="color: #e2121d;"></i> Categories
-    </a>
-    <a href="${pageContext.request.contextPath}/watched-films">
-        <i class="fa-solid fa-eye" style="color: #e2121d;"></i> Watched
-    </a>
-    <a href="${pageContext.request.contextPath}/watchlist">
-        <i class="fa-regular fa-bookmark" style="color: #e2121d;"></i> Watchlist
-    </a>
+    <div class="nav-left">
+        <a href="${pageContext.request.contextPath}/films">
+            <i class="fa-solid fa-film" style="color: #e2121d;"></i> Films
+        </a>
+        <a href="${pageContext.request.contextPath}/actors">
+            <i class="fa-solid fa-users" style="color: #e2121d;"></i> Actors
+        </a>
+        <a href="${pageContext.request.contextPath}/categories">
+            <i class="fa-solid fa-list" style="color: #e2121d;"></i> Categories
+        </a>
+        <a href="${pageContext.request.contextPath}/watched-films">
+            <i class="fa-solid fa-eye" style="color: #e2121d;"></i> Watched
+        </a>
+        <a href="${pageContext.request.contextPath}/watchlist">
+            <i class="fa-regular fa-bookmark" style="color: #e2121d;"></i> Watchlist
+        </a>
+    </div>
     
     <div class="user-info" style="float: right;">
-            <span>${customer.firstName} ${customer.lastName}</span>
+        <span>${customer.firstName} ${customer.lastName}</span>
 
-            <a href="${pageContext.request.contextPath}/logout" 
-               style="color: #e2121d; margin-left: 15px;">Logout</a>
-        </div>
+        <a href="${pageContext.request.contextPath}/logout" 
+           style="color: #e2121d; margin-left: 15px;">Logout</a>
+    </div>
 </div>
