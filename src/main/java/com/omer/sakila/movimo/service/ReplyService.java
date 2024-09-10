@@ -52,40 +52,4 @@ public class ReplyService {
 	public void deleteReply(int replyId) {
 		replyRepository.deleteById(replyId);
 	}
-	
-	public void toggleLike(int replyId) {
-		Reply reply = replyRepository.findById(replyId);
-		
-		if(reply.isUserLiked()) {
-			reply.setLikeCount(reply.getLikeCount() - 1);
-			reply.setUserLiked(false);
-		} else {
-			if (reply.isUserDisliked()) {
-	            reply.setDislikeCount(reply.getDislikeCount() - 1);
-	            reply.setUserDisliked(false);
-	        }
-	        reply.setLikeCount(reply.getLikeCount() + 1);
-	        reply.setUserLiked(true);
-		}
-		
-		replyRepository.save(reply);
-	}
-	
-	public void toggleDislike(int replyId) {
-		Reply reply = replyRepository.findById(replyId);
-		
-		if (reply.isUserDisliked()) {
-	        reply.setDislikeCount(reply.getDislikeCount() - 1);
-	        reply.setUserDisliked(false);
-	    } else {
-	        if (reply.isUserLiked()) {
-	            reply.setLikeCount(reply.getLikeCount() - 1);
-	            reply.setUserLiked(false);
-	        }
-	        reply.setDislikeCount(reply.getDislikeCount() + 1);
-	        reply.setUserDisliked(true);
-	    }
-
-	    replyRepository.save(reply);
-	}
 }

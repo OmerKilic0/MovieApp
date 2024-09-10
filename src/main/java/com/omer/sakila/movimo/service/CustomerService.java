@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import com.omer.sakila.movimo.entity.Comment;
 import com.omer.sakila.movimo.entity.Customer;
 import com.omer.sakila.movimo.entity.Film;
+import com.omer.sakila.movimo.entity.Reply;
 import com.omer.sakila.movimo.repository.CommentRepository;
 import com.omer.sakila.movimo.repository.CustomerRepository;
 import com.omer.sakila.movimo.repository.FilmRepository;
+import com.omer.sakila.movimo.repository.ReplyRepository;
 
 @Service
 public class CustomerService {
@@ -27,10 +29,14 @@ public class CustomerService {
 	@Autowired
 	private CommentRepository commentRepository;
 	
-	public CustomerService(CustomerRepository customerRepository, FilmRepository filmRepository, CommentRepository commentRepository) {
+	@Autowired
+	private ReplyRepository replyRepository;
+	
+	public CustomerService(CustomerRepository customerRepository, FilmRepository filmRepository, CommentRepository commentRepository, ReplyRepository replyRepository) {
 		this.customerRepository = customerRepository;
 		this.filmRepository = filmRepository;
 		this.commentRepository = commentRepository;
+		this.replyRepository = replyRepository;
 	}
 	
 	public List<Customer> getAllCustomers(){
@@ -131,11 +137,61 @@ public class CustomerService {
         }
     }
     
+    public void likeReply(int customerId, int replyId) {
+    	Customer customer = customerRepository.findById(customerId);
+    	Reply reply = replyRepository.findById(replyId);
+    	
+    	if(!hasLikedReply(customerId, replyId)) {
+    		customer.getLikedReplies().add(reply);
+    		customer.getDislikedReplies().remove(reply);
+    		reply.setLikeCount(reply.getLikeCount() + 1);
+    		if (hasDislikedReply(customerId, replyId)) {
+                reply.setDislikeCount(reply.getDislikeCount() - 1);
+            }
+            replyRepository.save(reply);
+            customerRepository.save(customer);
+    	}
+    	else {
+    		customer.getLikedReplies().remove(reply);
+    		reply.setLikeCount(reply.getLikeCount() - 1);
+    		replyRepository.save(reply);
+    	}
+    }
+    
+    public void dislikeReply(int customerId, int replyId) {
+    	Customer customer = customerRepository.findById(customerId);
+        Reply reply = replyRepository.findById(replyId);
+        
+        if(!hasDislikedReply(customerId, replyId)) {
+        	customer.getDislikedReplies().add(reply);
+        	customer.getLikedReplies().remove(reply);
+        	reply.setDislikeCount(reply.getDislikeCount() + 1);
+            if (hasLikedReply(customerId, replyId)) {
+                reply.setLikeCount(reply.getLikeCount() - 1);
+            }
+        	customerRepository.save(customer);
+        	replyRepository.save(reply);
+        }
+        else {
+        	customer.getDislikedReplies().remove(reply);
+        	reply.setDislikeCount(reply.getDislikeCount() - 1);
+        	replyRepository.save(reply);
+        }
+    }
+    
     public boolean hasLikedComment(int customerId, int commentId) {
         return customerRepository.hasLikedComment(customerId, commentId);
     }
 
     public boolean hasDislikedComment(int customerId, int commentId) {
         return customerRepository.hasDislikedComment(customerId, commentId);
-    }   
+    }
+    
+    public boolean hasLikedReply(int customerId, int replyId) {
+        return customerRepository.hasLikedReply(customerId, replyId);
+    }
+
+    public boolean hasDislikedReply(int customerId, int replyId) {
+        return customerRepository.hasDislikedReply(customerId, replyId);
+    }
 }

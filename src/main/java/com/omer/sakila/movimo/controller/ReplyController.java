@@ -40,12 +40,14 @@ public class ReplyController {
 	}
 	
 	@PostMapping("/toggleReplyLike")
-    public void toggleReplyLike(@RequestParam int replyId) {
-        replyService.toggleLike(replyId);
-        }
+    public void likeReply(@RequestParam int replyId) {
+		Customer customer = customerService.authenticateUser();
+        customerService.likeReply(customer.getId(), replyId);
+    }
 
     @PostMapping("/toggleReplyDislike")
-    public void toggleReplyDislike(@RequestParam int replyId) {
-        replyService.toggleDislike(replyId);
+    public void dislikeReply(@RequestParam int replyId) {
+    	Customer customer = customerService.authenticateUser();
+    	customerService.dislikeReply(customer.getId(), replyId);
     }
 }

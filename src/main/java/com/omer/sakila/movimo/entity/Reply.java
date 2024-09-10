@@ -1,6 +1,8 @@
 package com.omer.sakila.movimo.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -38,6 +41,12 @@ public class Reply {
 
 	@Column(name = "created_at")
 	private Date createdAt;
+	
+	@ManyToMany(mappedBy = "likedReplies")
+    private Set<Customer> likedByCustomers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "dislikedReplies")
+    private Set<Customer> dislikedByCustomers = new HashSet<>();
 
 	private boolean userLiked = false;
 	private boolean userDisliked = false;
@@ -112,5 +121,21 @@ public class Reply {
 
 	public void setUserDisliked(boolean userDisliked) {
 		this.userDisliked = userDisliked;
+	}
+
+	public Set<Customer> getLikedByCustomers() {
+		return likedByCustomers;
+	}
+
+	public void setLikedByCustomers(Set<Customer> likedByCustomers) {
+		this.likedByCustomers = likedByCustomers;
+	}
+
+	public Set<Customer> getDislikedByCustomers() {
+		return dislikedByCustomers;
+	}
+
+	public void setDislikedByCustomers(Set<Customer> dislikedByCustomers) {
+		this.dislikedByCustomers = dislikedByCustomers;
 	}
 }

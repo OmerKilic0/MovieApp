@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.omer.sakila.movimo.entity.Comment;
 import com.omer.sakila.movimo.entity.Customer;
 import com.omer.sakila.movimo.entity.Film;
+import com.omer.sakila.movimo.entity.Reply;
 import com.omer.sakila.movimo.service.CommentService;
 import com.omer.sakila.movimo.service.CustomerService;
 import com.omer.sakila.movimo.service.FilmService;
 import com.omer.sakila.movimo.service.PurchaseService;
+import com.omer.sakila.movimo.service.ReplyService;
 
 @Controller
 @RequestMapping("/films")
@@ -36,12 +38,16 @@ public class FilmController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private ReplyService replyService;
 
-	public FilmController(FilmService filmService, PurchaseService purchaseService, CustomerService customerService, CommentService commentService) {
+	public FilmController(FilmService filmService, PurchaseService purchaseService, CustomerService customerService, CommentService commentService, ReplyService replyService) {
 		this.filmService = filmService;
 		this.purchaseService = purchaseService;
 		this.customerService = customerService;
 		this.commentService = commentService;
+		this.replyService = replyService;
 	}
 
 	@GetMapping
@@ -76,6 +82,7 @@ public class FilmController {
 				.collect(Collectors.toSet());
 
 		List<Comment> comments = commentService.findCommentsByFilm(film.getId());
+		List<Reply> replies = null;
 		
 		for (Comment comment : comments) {
 	        boolean userLiked = customerService.hasLikedComment(customer.getId(), comment.getId());
@@ -83,6 +90,17 @@ public class FilmController {
 	        
 	        comment.setUserLiked(userLiked);
 	        comment.setUserDisliked(userDisliked);
+	        
+	        replies = replyService.getRepliesByCommentId(comment.getId());
+	        
+	        for(Reply reply : replies) {
+	        	boolean userLikedReply = customerService.hasLikedReply(customer.getId(), reply.getId());
+	        	boolean userDislikedReply = customerService.hasDislikedReply(customer.getId(), reply.getId());
+	        	
+	        	reply.setUserLiked(userLikedReply);
+	            reply.setUserDisliked(userDislikedReply);
+	        }
+	        comment.setReplies(replies);
 	    }
 		
 		boolean hasPurchased = purchaseService.hasPurchasedFilm(customer.getId(), film.getId());
@@ -94,6 +112,7 @@ public class FilmController {
 			model.addAttribute("watched", watchedFilmIds);
 			model.addAttribute("inWatchlist", watchlistFilmIds);
 			model.addAttribute("comments", comments);
+			model.addAttribute("replies", replies);
 		}
 		return "film-details";
 	}

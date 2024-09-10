@@ -71,6 +71,22 @@ public class Customer {
         inverseJoinColumns = @JoinColumn(name = "comment_id")
     )
     private Set<Comment> dislikedComments = new HashSet<>();
+    
+    @ManyToMany
+    @JoinTable(
+        name = "customer_liked_reply",
+        joinColumns = @JoinColumn(name = "customer_id"),
+        inverseJoinColumns = @JoinColumn(name = "reply_id")
+    )
+    private Set<Reply> likedReplies = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "customer_disliked_reply",
+        joinColumns = @JoinColumn(name = "customer_id"),
+        inverseJoinColumns = @JoinColumn(name = "reply_id")
+    )
+    private Set<Reply> dislikedReplies = new HashSet<>();
 
 	public int getId() {
 		return id;
@@ -174,5 +190,21 @@ public class Customer {
 
 	public void setDislikedComments(Set<Comment> dislikedComments) {
 		this.dislikedComments = dislikedComments;
+	}
+
+	public Set<Reply> getLikedReplies() {
+		return likedReplies;
+	}
+
+	public void setLikedReplies(Set<Reply> likedReplies) {
+		this.likedReplies = likedReplies;
+	}
+
+	public Set<Reply> getDislikedReplies() {
+		return dislikedReplies;
+	}
+
+	public void setDislikedReplies(Set<Reply> dislikedReplies) {
+		this.dislikedReplies = dislikedReplies;
 	}
 }

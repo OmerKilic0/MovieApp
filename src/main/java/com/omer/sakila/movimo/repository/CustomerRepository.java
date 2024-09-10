@@ -8,15 +8,24 @@ import org.springframework.stereotype.Repository;
 import com.omer.sakila.movimo.entity.Customer;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer>{
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	Customer findById(int id);
-	Customer findByEmail(String email);
-	
-	@Query("SELECT CASE WHEN COUNT(c) > 0 THEN TRUE ELSE FALSE END " +
-	           "FROM Customer cu JOIN cu.likedComments c WHERE cu.id = :customerId AND c.id = :commentId")
-	    boolean hasLikedComment(@Param("customerId") int customerId, @Param("commentId") int commentId);
 
-	    @Query("SELECT CASE WHEN COUNT(c) > 0 THEN TRUE ELSE FALSE END " +
-	           "FROM Customer cu JOIN cu.dislikedComments c WHERE cu.id = :customerId AND c.id = :commentId")
-	    boolean hasDislikedComment(@Param("customerId") int customerId, @Param("commentId") int commentId);
+	Customer findByEmail(String email);
+
+	@Query("SELECT CASE WHEN COUNT(c) > 0 THEN TRUE ELSE FALSE END "
+			+ "FROM Customer cu JOIN cu.likedComments c WHERE cu.id = :customerId AND c.id = :commentId")
+	boolean hasLikedComment(@Param("customerId") int customerId, @Param("commentId") int commentId);
+
+	@Query("SELECT CASE WHEN COUNT(c) > 0 THEN TRUE ELSE FALSE END "
+			+ "FROM Customer cu JOIN cu.dislikedComments c WHERE cu.id = :customerId AND c.id = :commentId")
+	boolean hasDislikedComment(@Param("customerId") int customerId, @Param("commentId") int commentId);
+
+	@Query("SELECT CASE WHEN COUNT(r) > 0 THEN TRUE ELSE FALSE END "
+			+ "FROM Customer cu JOIN cu.likedReplies r WHERE cu.id = :customerId AND r.id = :replyId")
+	boolean hasLikedReply(@Param("customerId") int customerId, @Param("replyId") int replyId);
+
+	@Query("SELECT CASE WHEN COUNT(r) > 0 THEN TRUE ELSE FALSE END "
+			+ "FROM Customer cu JOIN cu.dislikedReplies r WHERE cu.id = :customerId AND r.id = :replyId")
+	boolean hasDislikedReply(@Param("customerId") int customerId, @Param("replyId") int replyId);
 }
