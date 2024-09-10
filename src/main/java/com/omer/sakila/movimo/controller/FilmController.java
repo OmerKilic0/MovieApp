@@ -1,5 +1,6 @@
 package com.omer.sakila.movimo.controller;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.omer.sakila.movimo.entity.Comment;
 import com.omer.sakila.movimo.entity.Customer;
 import com.omer.sakila.movimo.entity.Film;
 import com.omer.sakila.movimo.service.CommentService;
@@ -73,6 +75,16 @@ public class FilmController {
 		Set<Integer> watchlistFilmIds = customerService.getWatchlistFilms(customer.getId()).stream().map(Film::getId)
 				.collect(Collectors.toSet());
 
+		List<Comment> comments = commentService.findCommentsByFilm(film.getId());
+		
+		for (Comment comment : comments) {
+	        boolean userLiked = customerService.hasLikedComment(customer.getId(), comment.getId());
+	        boolean userDisliked = customerService.hasDislikedComment(customer.getId(), comment.getId());
+	        
+	        comment.setUserLiked(userLiked);
+	        comment.setUserDisliked(userDisliked);
+	    }
+		
 		boolean hasPurchased = purchaseService.hasPurchasedFilm(customer.getId(), film.getId());
 		if (film != null) {
 			model.addAttribute("film", film);
@@ -81,7 +93,7 @@ public class FilmController {
 			model.addAttribute("customer", customer);
 			model.addAttribute("watched", watchedFilmIds);
 			model.addAttribute("inWatchlist", watchlistFilmIds);
-			model.addAttribute("comments", commentService.findCommentsByFilm(film.getId()));
+			model.addAttribute("comments", comments);
 		}
 		return "film-details";
 	}

@@ -45,42 +45,6 @@ public class CommentService {
 		commentRepository.save(comment);
 	}
 
-	public void toggleLike(int commentId) {
-		Comment comment = commentRepository.findById(commentId);
-
-		if (comment.isUserLiked()) {
-			comment.setLikeCount(comment.getLikeCount() - 1);
-			comment.setUserLiked(false);
-		} else {
-			if (comment.isUserDisliked()) {
-				comment.setDislikeCount(comment.getDislikeCount() - 1);
-				comment.setUserDisliked(false);
-			}
-			comment.setLikeCount(comment.getLikeCount() + 1);
-			comment.setUserLiked(true);
-		}
-
-		commentRepository.save(comment);
-	}
-
-	public void toggleDislike(int commentId) {
-		Comment comment = commentRepository.findById(commentId);
-
-		if (comment.isUserDisliked()) {
-			comment.setDislikeCount(comment.getDislikeCount() - 1);
-			comment.setUserDisliked(false);
-		} else {
-			if (comment.isUserLiked()) {
-				comment.setLikeCount(comment.getLikeCount() - 1);
-				comment.setUserLiked(false);
-			}
-			comment.setDislikeCount(comment.getDislikeCount() + 1);
-			comment.setUserDisliked(true);
-		}
-
-		commentRepository.save(comment);
-	}
-
 	public List<Comment> findCommentsByFilm(int filmId) {
 		return commentRepository.findByFilmId(filmId);
 	}

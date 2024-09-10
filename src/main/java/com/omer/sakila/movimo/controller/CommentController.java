@@ -40,12 +40,14 @@ public class CommentController {
 	}
 	
 	@PostMapping("/toggleCommentLike")
-	public void updateLikeCount(@RequestParam int commentId) {
-		commentService.toggleLike(commentId);
+	public void likeComment(@RequestParam int commentId) {
+		Customer customer = customerService.authenticateUser();
+		customerService.likeComment(customer.getId(), commentId);
 	}
 	
 	@PostMapping("/toggleCommentDislike")
-	public void updateDislikeCount(@RequestParam int commentId) {
-		commentService.toggleDislike(commentId);
-	}	
+	public void dislikeComment(@RequestParam int commentId) {
+		Customer customer = customerService.authenticateUser();
+		customerService.dislikeComment(customer.getId(), commentId);
+	}
 }

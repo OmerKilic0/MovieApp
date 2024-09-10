@@ -55,6 +55,22 @@ public class Customer {
 	@ManyToMany
 	@JoinTable(name = "customer_watchlist", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "film_id"))
 	private Set<Film> watchlist = new HashSet<>();
+	
+	@ManyToMany
+    @JoinTable(
+        name = "customer_liked_comment",
+        joinColumns = @JoinColumn(name = "customer_id"),
+        inverseJoinColumns = @JoinColumn(name = "comment_id")
+    )
+    private Set<Comment> likedComments = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+        name = "customer_disliked_comment",
+        joinColumns = @JoinColumn(name = "customer_id"),
+        inverseJoinColumns = @JoinColumn(name = "comment_id")
+    )
+    private Set<Comment> dislikedComments = new HashSet<>();
 
 	public int getId() {
 		return id;
@@ -142,5 +158,21 @@ public class Customer {
 
 	public void setWatchlist(Set<Film> watchlist) {
 		this.watchlist = watchlist;
+	}
+
+	public Set<Comment> getLikedComments() {
+		return likedComments;
+	}
+
+	public void setLikedComments(Set<Comment> likedComments) {
+		this.likedComments = likedComments;
+	}
+
+	public Set<Comment> getDislikedComments() {
+		return dislikedComments;
+	}
+
+	public void setDislikedComments(Set<Comment> dislikedComments) {
+		this.dislikedComments = dislikedComments;
 	}
 }
