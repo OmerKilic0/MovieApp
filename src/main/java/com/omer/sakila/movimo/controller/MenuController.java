@@ -79,17 +79,51 @@ public class MenuController {
 		Set<Integer> watchedFilmIds = customerService.getWatchedFilms(customer.getId()).stream().map(Film::getId)
 				.collect(Collectors.toSet());
 		List<Film> watchedFilms = new ArrayList<>();
+		List<Film> filteredWatchedFilms = new ArrayList<>();
 
 		for (int watchedFilmId : watchedFilmIds) {
 			watchedFilms.add(filmService.getFilmById(watchedFilmId));
 		}
 
 		if (name != null && !name.isEmpty()) {
-			model.addAttribute("watchedFilms", filmService.searchFilmsByName(name));
+			List<Film> filmsContainingName = filmService.searchFilmsByName(name);
+			for(Film watchedFilm : watchedFilms) {
+				if(filmsContainingName.contains(watchedFilm)) {
+					filteredWatchedFilms.add(watchedFilm);
+				}
+			}
+			model.addAttribute("watchedFilms", filteredWatchedFilms);
 		} else {
 			model.addAttribute("watchedFilms", watchedFilms);
 		}
 		return "watched-films";
+	}
+	
+	@GetMapping("watchlist/search")
+	public String searchFilmsWatchlist(@RequestParam(required = false) String name, ModelMap model) {
+		Customer customer = customerService.authenticateUser();
+		model.addAttribute("customer", customer);
+		Set<Integer> watchlistFilmIds = customerService.getWatchlistFilms(customer.getId()).stream().map(Film::getId)
+				.collect(Collectors.toSet());
+		List<Film> watchlist = new ArrayList<>();
+		List<Film> filteredWatchlistFilms = new ArrayList<>();
+
+		for (int watchlistFilmId : watchlistFilmIds) {
+			watchlist.add(filmService.getFilmById(watchlistFilmId));
+		}
+
+		if (name != null && !name.isEmpty()) {
+			List<Film> filmsContainingName = filmService.searchFilmsByName(name);
+			for(Film watchlistFilm : watchlist) {
+				if(filmsContainingName.contains(watchlistFilm)) {
+					filteredWatchlistFilms.add(watchlistFilm);
+				}
+			}
+			model.addAttribute("watchlist", filteredWatchlistFilms);
+		} else {
+			model.addAttribute("watchlist", watchlist);
+		}
+		return "watchlist";
 	}
 	
 	@GetMapping("watchlist")
@@ -108,23 +142,5 @@ public class MenuController {
 		return "watchlist";
 	}
 
-	@GetMapping("watchlist/search")
-	public String searchFilmsWatchlist(@RequestParam(required = false) String name, ModelMap model) {
-		Customer customer = customerService.authenticateUser();
-		model.addAttribute("customer", customer);
-		Set<Integer> watchlistFilmIds = customerService.getWatchlistFilms(customer.getId()).stream().map(Film::getId)
-				.collect(Collectors.toSet());
-		List<Film> watchlist = new ArrayList<>();
-
-		for (int watchlistFilmId : watchlistFilmIds) {
-			watchlist.add(filmService.getFilmById(watchlistFilmId));
-		}
-
-		if (name != null && !name.isEmpty()) {
-			model.addAttribute("watchlist", filmService.searchFilmsByName(name));
-		} else {
-			model.addAttribute("watchlist", watchlist);
-		}
-		return "watchlist";
-	}
+	
 }
