@@ -142,6 +142,21 @@
     text-decoration: none;
 }
 
+.star-rating {
+    display: inline-block;
+    direction: ltr;
+}
+
+.star-rating .fa-star {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.star-rating .fa-star.selected {
+    color: gold;
+}
+
 .comment-container {
     background-color: #1c1c1c;
     border: 2px solid #003566;

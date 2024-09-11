@@ -166,3 +166,31 @@ function showReplyForm(commentId) {
         replyForm.style.display = 'none';
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const stars = document.querySelectorAll('.star-rating .fa-star');
+    const ratingValue = document.getElementById('rating-value');
+    const userRating = document.querySelector('.star-rating').getAttribute('data-user-rating');
+    
+    if (userRating) {
+        for (let i = 0; i < userRating; i++) {
+            stars[i].classList.add('selected');
+        }
+    }
+
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = this.getAttribute('data-rating');
+            
+            ratingValue.value = rating;
+
+            stars.forEach(s => {
+                s.classList.remove('selected');
+            });
+
+            for (let i = 0; i < rating; i++) {
+                stars[i].classList.add('selected');
+            }
+        });
+    });
+});

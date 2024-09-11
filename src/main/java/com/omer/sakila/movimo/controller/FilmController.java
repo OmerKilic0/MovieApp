@@ -21,6 +21,7 @@ import com.omer.sakila.movimo.service.CommentService;
 import com.omer.sakila.movimo.service.CustomerService;
 import com.omer.sakila.movimo.service.FilmService;
 import com.omer.sakila.movimo.service.PurchaseService;
+import com.omer.sakila.movimo.service.RatingService;
 import com.omer.sakila.movimo.service.ReplyService;
 
 @Controller
@@ -41,13 +42,17 @@ public class FilmController {
 	
 	@Autowired
 	private ReplyService replyService;
+	
+	@Autowired
+	private RatingService ratingService;
 
-	public FilmController(FilmService filmService, PurchaseService purchaseService, CustomerService customerService, CommentService commentService, ReplyService replyService) {
+	public FilmController(FilmService filmService, PurchaseService purchaseService, CustomerService customerService, CommentService commentService, ReplyService replyService, RatingService ratingService) {
 		this.filmService = filmService;
 		this.purchaseService = purchaseService;
 		this.customerService = customerService;
 		this.commentService = commentService;
 		this.replyService = replyService;
+		this.ratingService = ratingService;
 	}
 
 	@GetMapping
@@ -68,6 +73,14 @@ public class FilmController {
 			model.addAttribute("films", filmService.getAllFilms());
 		}
 		return "films";
+	}
+	
+	@PostMapping("/rate")
+	public String rateFilm(@RequestParam("filmId") int filmId, @RequestParam("rating") int rating, ModelMap model) {
+		Customer customer = customerService.authenticateUser();
+		model.addAttribute(customer);
+		ratingService.rateFilm(filmId, customer.getId(), rating);
+		return "redirect:/films/" + filmService.getFilmById(filmId).getTitle();
 	}
 
 	@GetMapping("/{title}")
@@ -103,6 +116,10 @@ public class FilmController {
 	        comment.setReplies(replies);
 	    }
 		
+		Double averageRating = ratingService.getAverageRating(film.getId());
+        Integer totalRatings = ratingService.getTotalRatings(film.getId());
+        int userRating = ratingService.getUserRatingForFilm(film.getId(), customer.getId());
+		
 		boolean hasPurchased = purchaseService.hasPurchasedFilm(customer.getId(), film.getId());
 		if (film != null) {
 			model.addAttribute("film", film);
@@ -113,6 +130,9 @@ public class FilmController {
 			model.addAttribute("inWatchlist", watchlistFilmIds);
 			model.addAttribute("comments", comments);
 			model.addAttribute("replies", replies);
+			model.addAttribute("averageRating", averageRating != null ? averageRating : 0.0);
+	        model.addAttribute("totalRatings", totalRatings != null ? totalRatings : 0);
+	        model.addAttribute("userRating", userRating);
 		}
 		return "film-details";
 	}

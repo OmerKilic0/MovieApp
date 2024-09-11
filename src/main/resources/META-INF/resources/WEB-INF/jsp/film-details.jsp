@@ -81,12 +81,44 @@
 					</div>
 				</div>
 				<h1>${film.title}</h1>
-				<ul class="categories">
-					<c:forEach var="category" items="${film.categories}">
-						<li><a
-							onclick="window.location.href='/categories/${category.name}'">${category.name}</a></li>
-					</c:forEach>
-				</ul>
+				<div class="film-categories-rating">
+					<ul class="categories">
+						<c:forEach var="category" items="${film.categories}">
+							<li><a
+								onclick="window.location.href='/categories/${category.name}'">${category.name}</a></li>
+						</c:forEach>
+					</ul>
+
+					<div class="rating-area">
+						<form action="/films/rate" method="post" class="rating-form">
+							<input type="hidden" name="filmId" value="${film.id}"> <label
+								for="rating">Rate this film:</label> <input type="hidden"
+								name="rating" id="rating-value" value="${userRating}">
+
+							<div class="star-rating" data-user-rating="${userRating}">
+								<i class="fa fa-star" data-rating="1"></i>
+								<i class="fa fa-star" data-rating="2"></i>
+								<i class="fa fa-star" data-rating="3"></i>
+								<i class="fa fa-star" data-rating="4"></i>
+								<i class="fa fa-star" data-rating="5"></i>
+							</div>
+
+							<button type="submit">Submit</button>
+						</form>
+
+						<div class="rating-stats">
+							<p>
+								<i class="fa-solid fa-users" style="color: #fdf0d5;"></i> <span
+									class="film-attribute"> Rated by: </span> ${totalRatings} users
+							</p>
+							<p>
+								<i class="fa-solid fa-star" style="color: #fdf0d5;"></i> <span
+									class="film-attribute"> Average rating: </span>
+								${averageRating}/5.0
+							</p>
+						</div>
+					</div>
+				</div>
 				<p>${film.description}</p>
 				<p>
 					<i class="bi bi-translate" style="color: #fdf0d5;"></i> <span
@@ -153,8 +185,9 @@
 				<c:forEach var="comment" items="${comments}">
 					<li>
 						<div class="comment-content">
-							<strong>${comment.customer.firstName} ${comment.customer.lastName}</strong>
-							<small><fmt:formatDate value="${comment.createdAt}" pattern="dd-MM-yyyy, HH:mm" /></small>
+							<strong>${comment.customer.firstName}
+								${comment.customer.lastName}</strong> <small><fmt:formatDate
+									value="${comment.createdAt}" pattern="dd-MM-yyyy, HH:mm" /></small>
 							<p>${comment.comment}</p>
 						</div>
 						<div class="comment-actions">
