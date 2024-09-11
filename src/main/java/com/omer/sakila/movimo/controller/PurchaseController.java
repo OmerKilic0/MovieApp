@@ -44,15 +44,41 @@ public class PurchaseController {
 	}
 	
 	@PostMapping("/buy")
-	public ResponseEntity<String> buyFilm(@RequestParam int customerId, @RequestParam int filmId, @RequestParam double amount){
+	public ResponseEntity<String> buyFilm(@RequestParam int customerId, @RequestParam int filmId, @RequestParam double amount) throws Exception {
 		Purchase purchase = purchaseService.createPurchase(customerId, filmId);
 		paymentService.createPayment(purchase.getId(), amount);
 		
 		Customer customer = customerService.findById(customerId);
 		Film film = filmService.getFilmById(filmId);
 		
-		emailService.sendPurchaseNotification(customer.getEmail(), film.getTitle());
+		byte[] pdfInvoice = emailService.createInvoicePdf(customer, film, amount);
 		
-		return ResponseEntity.ok("Film purchased successfully!");
+		emailService.sendPurchaseNotification(customer, film.getTitle(), pdfInvoice);
+		
+ 		return ResponseEntity.ok("Film purchased successfully!");
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

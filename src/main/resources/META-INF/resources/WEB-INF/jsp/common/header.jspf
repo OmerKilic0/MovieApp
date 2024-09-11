@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="app-name">
+	<img alt="" src="${pageContext.request.contextPath}/images/logo/logo.jpg" style="width: 50px; height: auto;">
     <a href="${pageContext.request.contextPath}/"
         style="color: #c1121f; text-decoration: none;">Movimo</a>
 </div>
